@@ -5,8 +5,22 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+DEVICE_PACKAGE_OVERLAYS += device/google/zuma/overlay-lineage
+
+# Disable Artifact Requirements
+DISABLE_ARTIFACT_PATH_REQUIREMENTS := true
+
+# UDFPS
+TARGET_CUSTOM_UDFPS := true
+
+# Bypass Charging
+BYPASS_CHARGE_SUPPORTED := true
+
+# Build Duplicates
+BUILD_BROKEN_DUP_RULES := true
+
 # Installs gsi keys into ramdisk, to boot a developer GSI with verified boot.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/developer_gsi_keys.mk)
+# $(call inherit-product, $(SRC_TARGET_DIR)/product/developer_gsi_keys.mk)
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.ipsec_tunnel_migration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.ipsec_tunnel_migration.xml
@@ -79,16 +93,8 @@ PRODUCT_PRODUCT_VNDK_VERSION := current
 PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := true
 
 # Init files
-ifeq (true,$(filter $(TARGET_BOOTS_16K) $(PRODUCT_16K_DEVELOPER_OPTION),true))
-PRODUCT_COPY_FILES += \
-	device/google/zuma/conf/init.efs.16k.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.efs.rc \
-	device/google/$(TARGET_BOARD_PLATFORM)/conf/fstab.efs.from_data:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.efs.from_data \
-
-PRODUCT_PACKAGES += fsck.f2fs.vendor
-else
 PRODUCT_COPY_FILES += \
 	device/google/zuma/conf/init.efs.4k.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.efs.rc
-endif
 
 # Recovery files
 PRODUCT_COPY_FILES += \
@@ -357,20 +363,12 @@ PRODUCT_PACKAGES += \
     EuiccSupportPixelOverlay \
     FrameworkResOverlayProductZuma \
     FrameworkResOverlayVendorZuma \
-    GlanceableHubConfigOverlay \
-    GlanceableHubSettingsConfigOverlay \
-    GlanceableHubSettingsConfigOverlay2022 \
-    GlanceableHubSysuiConfigOverlay \
-    GoogleConfigOverlay \
     GooglePermissionControllerSafetyCenterOverlay \
-    PixelConfigOverlay2019 \
-    PixelConfigOverlay2021 \
-    PixelConfigOverlayCommon \
     PixelConnectivityOverlay2023 \
     PixelDisplayServiceOverlayProductZuma \
     PixelNfcOverlayCommon \
     PixelTetheringOverlay2021 \
-    PixelWifiOverlay2024_midyearZuma \
+    PixelWifiOverlay2024_midyear \
     SafetyRegulatoryInfoOverlayProductZuma \
     SettingsGoogleOverlayProductZuma \
     SettingsProviderOverlayProductZuma \
@@ -393,6 +391,7 @@ PRODUCT_PACKAGES += \
 
 # Properties
 TARGET_PRODUCT_PROP += device/google/zuma/product.prop
+TARGET_SYSTEM_PROP += device/google/zuma/system.prop
 TARGET_SYSTEM_EXT_PROP += device/google/zuma/system_ext.prop
 TARGET_VENDOR_PROP += device/google/zuma/vendor.prop
 
