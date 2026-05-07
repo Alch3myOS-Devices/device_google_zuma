@@ -10,12 +10,6 @@ DEVICE_PACKAGE_OVERLAYS += device/google/zuma/overlay-lineage
 # Disable Artifact Requirements
 DISABLE_ARTIFACT_PATH_REQUIREMENTS := true
 
-# UDFPS
-TARGET_CUSTOM_UDFPS := true
-
-# Bypass Charging
-BYPASS_CHARGE_SUPPORTED := true
-
 # Build Duplicates
 BUILD_BROKEN_DUP_RULES := true
 

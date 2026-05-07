@@ -135,25 +135,6 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 11796480000
 PRODUCT_FS_COMPRESSION := 1
 BOARD_FLASH_BLOCK_SIZE := 4096
 
-ifneq ($(WITH_GMS),true)
-# system.img
-BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT := -1
-BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 52428800
-TARGET_COPY_OUT_SYSTEM := system
-
-# product.img
-BOARD_PRODUCTIMAGE_EXTFS_INODE_COUNT := -1
-BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE := 1988938957
-TARGET_COPY_OUT_PRODUCT := product
-
-# system_ext.img
-BOARD_SYSTEM_EXTIMAGE_EXTFS_INODE_COUNT := -1
-BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE := 52428800
-TARGET_COPY_OUT_SYSTEM_EXT := system_ext
-else
 # system.img
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
 
@@ -164,7 +145,6 @@ TARGET_COPY_OUT_PRODUCT := product
 # system_ext.img
 BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_SYSTEM_EXT := system_ext
-endif
 
 # vendor.img
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -282,3 +262,18 @@ SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += \
 
 # Protected VM firmware
 BOARD_PVMFWIMAGE_PARTITION_SIZE := 0x00100000
+
+# =========================================================
+# Alch3myOS Partition Size Fixes
+# =========================================================
+
+# Reclaim space by reducing the 'reserved' buffer in each partition.
+# Google's defaults are very large; these 20MB buffers are much safer for custom ROMs.
+BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE := 20971520
+BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 20971520
+BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE := 20971520
+BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE := 20971520
+
+# Disable the system_other image to save 66MB and avoid partition checks on it.
+# system_other is mostly for pre-optimization cache and isn't needed for Alch3myOS.
+BOARD_BUILD_SYSTEM_OTHER_IMAGE := false
