@@ -312,6 +312,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml
 
+PRODUCT_COPY_FILES += \
+    device/google/zuma/audio_effects_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects_config.xml
+
 # Bionic
 PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO := true
 
