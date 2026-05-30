@@ -90,6 +90,9 @@ PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := true
 PRODUCT_COPY_FILES += \
 	device/google/zuma/conf/init.efs.4k.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.efs.rc
 
+PRODUCT_COPY_FILES += \
+        device/google/zuma/conf/init.v4a.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.v4a.rc
+
 # Recovery files
 PRODUCT_COPY_FILES += \
 	device/google/zuma/conf/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.zuma.rc
@@ -311,6 +314,12 @@ PRODUCT_PACKAGES += \
 # Audio
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml
+
+PRODUCT_COPY_FILES += \
+    device/google/zuma/audio_effects_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects_config.xml
+
+PRODUCT_COPY_FILES += \
+    device/google/zuma/audio_effects.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/audio_effects.xml
 
 # Bionic
 PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO := true

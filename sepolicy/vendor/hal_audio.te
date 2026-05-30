@@ -49,3 +49,9 @@ allow hal_audio_default sysfs_extcon:dir search;
 allow hal_audio_default sysfs_extcon:file r_file_perms;
 allow hal_audio_default sysfs_pixelstats:file rw_file_perms;
 allow hal_audio_default vendor_usb_debugfs:dir search;
+allow hal_audio_default self:process execmem;
+allow hal_audio_default viper_vendor_data_file:dir rw_dir_perms;
+allow hal_audio_default viper_vendor_data_file:file create_file_perms;
+allow hal_audio_default priv_app:fd use;
+allow hal_audio_default system_app:fd use;
+set_prop(hal_audio_default, vendor_audio_prop_restricted)
